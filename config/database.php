@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'default' => env('pgsql', 'mysql'),
+    'default' => 'pgsql'
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
             'prefix'   => '',
             'schema'   => 'public',
         ),
-        
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
