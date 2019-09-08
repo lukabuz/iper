@@ -27,7 +27,7 @@ class VisitController extends Controller
         $visit['device'] = $agent->device();
         $visit['os'] = $agent->platform();
         $visit['browser'] = $agent->browser();
-        $visit['location'] = $decodedLocation;
+        $visit['location'] = $decodedLocation->city . ', ' . $decodedLocation->country_name . ', ' . $decodedLocation->zipcode;
         $visit->save();
 
         abort(500);
