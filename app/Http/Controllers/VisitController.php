@@ -21,6 +21,8 @@ class VisitController extends Controller
         $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
         $decodedLocation = json_decode($location, true);
 
+        die($decodedLocation);
+
         $visit = new Visit;
         $visit['ip'] = $ip;
         $visit['user-agent'] = $userAgent;
