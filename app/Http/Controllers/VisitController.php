@@ -21,6 +21,10 @@ class VisitController extends Controller
         $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
         $decodedLocation = json_decode($location, true);
 
+        if($agent['device'] == 'Bot'){
+            abort(500);
+        }
+
         $visit = new Visit;
         $visit['ip'] = $ip;
         $visit['user-agent'] = $userAgent;
