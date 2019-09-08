@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/2947919051', 'VisitController@visit');
+
+Route::get('/dashboard', 'VisitController@dashboard');
