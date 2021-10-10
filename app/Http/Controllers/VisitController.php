@@ -40,7 +40,6 @@ class VisitController extends Controller
         $visit['os'] = $agent->platform();
         $visit['browser'] = $agent->browser();
         $visit['location'] = $locationString;
-        $visit['location'] = "NA";
         $visit['request_dump'] = json_encode($request->header());
         $visit->save();
 
