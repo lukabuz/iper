@@ -20,6 +20,7 @@
                 <th scope="col">Operating System</th>
                 <th scope="col">Browser</th>
                 <th scope="col">Estimated Location</th>
+                <th scope="col">Dump</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@
                     <td>{{ $visit->os }}</td>
                     <td>{{ $visit->browser }}</td>
                     <td>{{ $visit->location }}</td>
+                    <td>{{ $visit->request_dump }}</td>
                     </tr>
                 @empty
                 @endforelse

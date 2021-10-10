@@ -21,6 +21,7 @@ class CreateVisitsTable extends Migration
             $table->string('os');
             $table->string('browser');
             $table->string('location');
+            $table->longText('request_dump');
             $table->timestamps();
         });
     }
