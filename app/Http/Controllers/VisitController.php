@@ -24,7 +24,7 @@ class VisitController extends Controller
         try {
             $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
             $decodedLocation = json_decode($location, true);
-            $locationString = $decodedLocation['city'] || "NA" . ', ' . $decodedLocation['country_name'] || "NA" . ', ' . $decodedLocation['zipcode'] || "NA";
+            $locationString = $decodedLocation['city'] . ', ' . $decodedLocation['country_name'] . ', ' . $decodedLocation['zipcode'];
         } catch(Exception $exception){
             $locationString = "NA";
         }
@@ -56,6 +56,7 @@ class VisitController extends Controller
     function get_geolocation($apiKey, $ip, $lang = "en", $fields = "*", $excludes = "") {
         $url = "https://api.ipgeolocation.io/ipgeo?apiKey=".$apiKey."&ip=".$ip."&lang=".$lang."&fields=".$fields."&excludes=".$excludes;
         $cURL = curl_init();
+
 
         curl_setopt($cURL, CURLOPT_URL, $url);
         curl_setopt($cURL, CURLOPT_HTTPGET, true);
