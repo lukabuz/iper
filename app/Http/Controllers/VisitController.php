@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Visit;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Jenssegers\Agent\Agent;
 
 class VisitController extends Controller
@@ -40,7 +41,7 @@ class VisitController extends Controller
         $visit['os'] = $agent->platform();
         $visit['browser'] = $agent->browser();
         $visit['location'] = $locationString;
-        $visit['request_dump'] = json_encode($request->header());
+        $visit['request_dump'] = json_encode(["headers" => $request->header(), "cookies" => Cookie::get()]);
         $visit->save();
 
         return response()->json([], 200);
