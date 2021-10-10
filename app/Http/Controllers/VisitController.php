@@ -19,7 +19,7 @@ class VisitController extends Controller
         $agent->setUserAgent($userAgent);
 
         $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
-        $decodedLocation = json_decode($location, true);
+        // $decodedLocation = json_decode($location, true);
 
         // if($agent->device() == 'Bot'){
         //     abort(500);
@@ -31,7 +31,8 @@ class VisitController extends Controller
         $visit['device'] = $agent->device();
         $visit['os'] = $agent->platform();
         $visit['browser'] = $agent->browser();
-        $visit['location'] = $decodedLocation['city'] || "NA" . ', ' . $decodedLocation['country_name'] || "NA" . ', ' . $decodedLocation['zipcode'] || "NA";
+        // $visit['location'] = $decodedLocation['city'] || "NA" . ', ' . $decodedLocation['country_name'] || "NA" . ', ' . $decodedLocation['zipcode'] || "NA";
+        $visit['location'] = "NA";
         $visit['request_dump'] = $request->all();
         $visit->save();
 
