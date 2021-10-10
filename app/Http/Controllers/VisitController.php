@@ -21,9 +21,9 @@ class VisitController extends Controller
         $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
         $decodedLocation = json_decode($location, true);
 
-        if($agent->device() == 'Bot'){
-            abort(500);
-        }
+        // if($agent->device() == 'Bot'){
+        //     abort(500);
+        // }
 
         $visit = new Visit;
         $visit['ip'] = $ip;
@@ -35,7 +35,7 @@ class VisitController extends Controller
         $visit['request_dump'] = $request->all();
         $visit->save();
 
-        abort(500);
+        return response()->json([], 200);
     }
 
     public function dashboard(Request $request){
