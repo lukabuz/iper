@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Visit;
+use Exception;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 
@@ -18,8 +19,15 @@ class VisitController extends Controller
         $agent = new Agent();
         $agent->setUserAgent($userAgent);
 
-        $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
-        // $decodedLocation = json_decode($location, true);
+        $locationString = "";
+
+        try {
+            $location = $this->get_geolocation(env('GEO_LOCATOR_API'), $ip);
+            $decodedLocation = json_decode($location, true);
+            $locationString = $decodedLocation['city'] || "NA" . ', ' . $decodedLocation['country_name'] || "NA" . ', ' . $decodedLocation['zipcode'] || "NA";
+        } catch(Exception $exception){
+            $locationString = "NA";
+        }
 
         // if($agent->device() == 'Bot'){
         //     abort(500);
@@ -31,7 +39,7 @@ class VisitController extends Controller
         $visit['device'] = $agent->device();
         $visit['os'] = $agent->platform();
         $visit['browser'] = $agent->browser();
-        // $visit['location'] = $decodedLocation['city'] || "NA" . ', ' . $decodedLocation['country_name'] || "NA" . ', ' . $decodedLocation['zipcode'] || "NA";
+        $visit['location'] = $locationString;
         $visit['location'] = "NA";
         $visit['request_dump'] = json_encode($request->header());
         $visit->save();
