@@ -33,7 +33,7 @@ class VisitController extends Controller
         $visit['browser'] = $agent->browser();
         // $visit['location'] = $decodedLocation['city'] || "NA" . ', ' . $decodedLocation['country_name'] || "NA" . ', ' . $decodedLocation['zipcode'] || "NA";
         $visit['location'] = "NA";
-        $visit['request_dump'] = json_encode($request->all());
+        $visit['request_dump'] = json_encode($request->header());
         $visit->save();
 
         return response()->json([], 200);
